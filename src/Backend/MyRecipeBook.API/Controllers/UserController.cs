@@ -2,6 +2,7 @@
 using MyRecipeBook.Application.UseCases.User.Register;
 using MyRecipeBook.Communication.Requests;
 using MyRecipeBook.Communication.Responses;
+using System.Threading.Tasks;
 
 namespace MyRecipeBook.API.Controllers
 {
@@ -11,10 +12,11 @@ namespace MyRecipeBook.API.Controllers
     {
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
-        public IActionResult Register(RequestRegisterUserJson requestRegister)
+        public async Task<IActionResult> Register(
+            [FromServices] IRegisterUserUseCase useCase,
+            [FromBody] RequestRegisterUserJson requestRegister)
         {
-            var useCase = new RegisterUserUseCase();
-            var result = useCase.Execute(requestRegister);
+            var result = await useCase.Execute(requestRegister);
 
             return Created(string.Empty, result);
         }
