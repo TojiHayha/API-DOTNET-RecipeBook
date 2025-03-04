@@ -2,7 +2,6 @@
 using MyRecipeBook.Application.UseCases.User.Register;
 using MyRecipeBook.Communication.Requests;
 using MyRecipeBook.Communication.Responses;
-using System.Threading.Tasks;
 
 namespace MyRecipeBook.API.Controllers
 {
