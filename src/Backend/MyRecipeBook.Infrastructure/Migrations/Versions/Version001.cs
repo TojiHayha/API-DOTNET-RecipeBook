@@ -8,7 +8,7 @@ public class Version001 : VersionBase
 {
     public override void Up()
     {
-        Create.Table("Users")
+        CreateTable("Users")
             .WithColumn("Name").AsString(100).NotNullable()
             .WithColumn("Email").AsString(100).NotNullable()
             .WithColumn("Password").AsString(2000).NotNullable();
