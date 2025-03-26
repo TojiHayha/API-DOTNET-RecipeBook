@@ -48,3 +48,8 @@ void MigrateDatabase()
 
     DatabaseMigration.Migrate(connectionSting, serviceScope.ServiceProvider);
 }
+
+public partial class Program
+{
+
+}
