@@ -55,7 +55,7 @@ public class RegisterUserUseCaseTest
         exception.ErrorMessages.First().ShouldBe(ResourceMessagesException.NAME_EMPTY);
     }
 
-    private RegisterUserUseCase CreateUseCase(string? email = null)
+    private static RegisterUserUseCase CreateUseCase(string? email = null)
     {
         var mapper = MapperBuilder.Build();
         var passwordEncripter = PasswordEncripterBuilder.Build();
@@ -63,7 +63,7 @@ public class RegisterUserUseCaseTest
         var unitWork = UnitOfWorkBuilder.Build();
         var readRepositoryBuilder = new UserReadOnlyRepositoryBuilder();
 
-        if(string.IsNullOrEmpty(email) == false)
+        if(!string.IsNullOrEmpty(email))
         readRepositoryBuilder.ExistActiveUserWithEmail(email);
 
         return new RegisterUserUseCase(readRepositoryBuilder.Build(), writeRepository, unitWork, mapper, passwordEncripter);

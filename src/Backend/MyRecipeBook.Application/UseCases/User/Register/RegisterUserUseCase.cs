@@ -64,7 +64,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
             result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceMessagesException.EMAIL_ALREADY_REGISTERED));
         }
 
-        if (result.IsValid == false)
+        if (!result.IsValid)
         {
             var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
             throw new ErrorOnValidationException(errorMessages);

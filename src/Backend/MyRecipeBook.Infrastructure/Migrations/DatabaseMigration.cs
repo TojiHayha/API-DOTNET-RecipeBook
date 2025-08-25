@@ -28,7 +28,7 @@ public class DatabaseMigration
 
         var records = dbConnection.Query("SELECT * FROM sys.databases WHERE name = @name", parameters);
 
-        if (records.Any() == false)
+        if (!records.Any())
             dbConnection.Execute($"CREATE DATABASE {dataBaseName}"); 
     }
 
