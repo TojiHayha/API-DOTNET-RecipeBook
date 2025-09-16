@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyRecipeBook.Domain.Entites;
+using MyRecipeBook.Domain.Entities;
 
 namespace MyRecipeBook.Infrastructure.DataAccess;
 public class MyRecipeBookDbContext : DbContext

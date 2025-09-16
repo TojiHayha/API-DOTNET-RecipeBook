@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyRecipeBook.Domain.Entites;
+using MyRecipeBook.Domain.Entities;
 using MyRecipeBook.Domain.Repositories.User;
 
 namespace MyRecipeBook.Infrastructure.DataAccess.Repositories;
 
-public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository
+public class UserRepository : IUserWriteOnlyRepository, IUserReadOnlyRepository
 {
     private readonly MyRecipeBookDbContext _dbContext;
 
@@ -12,7 +12,14 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository
 
     public async Task AddUser(User user) => await _dbContext.Users.AddAsync(user);
 
-    public async Task<bool> ExistActiveUserWithEmail(string email) => await _dbContext.Users.AnyAsync(user => user.Email.Equals(email) && user.Active);
+    public async Task<bool> ExistActiveUserWithEmail(string email) => await _dbContext.Users.AnyAsync(user => user.Email == email && user.Active);
 
+    public async Task<User?> GetByEmailAndPassword(string email, string password)
+    {
+        return await _dbContext
+            .Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(user => user.Active && email == user.Email && user.Password == password);
+    }
 }
 
