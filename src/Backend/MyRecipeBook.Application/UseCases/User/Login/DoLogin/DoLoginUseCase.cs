@@ -24,7 +24,7 @@ public class DoLoginUseCase : IDoLoginUseCase
         var user = await _repository.GetByEmailAndPassword(request.Email, encriptedPassword) ?? throw new InvalidLoginException();
         return new ResponseRegisteredUserJson
         {
-            Name = user.Name
+            Name = user.Name!
         };
     }
 }
